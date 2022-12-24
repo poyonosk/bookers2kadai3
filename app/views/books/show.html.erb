@@ -1,16 +1,17 @@
 <div class="container">
-<div class="row">
+  <div class="row">
 
-  <div class="col-lg-4">
-      
+    <div class="col-md-3">
       <h1>Users info</h1>
       <div>
-      <%= image_tag @user.get_profile_image(100,100) %>
-      <h3><%= @user.name %></h3>
-      <h3><%= @user.introduction %></h3>
-      <% if @user == current_user %>
-        <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
-      <% end %>
+        <%= image_tag @book.user.get_profile_image(100,100) %>
+        <h3><%= @book.user.name %></h3>
+        <h3><%= @book.user.introduction %></h3>
+
+            <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
+            <i class="fas fa-user-cog"></i>
+            <% end %>
+ 
       </div>
 
       <h1>New book</h1>
@@ -21,21 +22,16 @@
       <%= f.text_area :body %>
       <%= f.submit "Create Book" %>
       <% end %>
-  </div>
+    </div>
 
-  <div class="col-lg-8">
-
-    <h1>Book detail</h1>
-
-    <table class="table table-striped">
-
-    <tbody>
-      <tr>
-        <div>
+    <div class="col-md-8 offset-md-1">
+      <h1>Book detail</h1>
+      <table class="table table-striped">
+      <tbody>
+        <tr>
           <th>
-            <%= link_to "user_name" do %>
-              <%= image_tag @book.user.get_profile_image(100,100) %>
-            <% end %>
+            <%= image_tag @book.user.get_profile_image(100,100) %><br>
+            <%= link_to @book.user.name, user_path(@book.user.id) %>
           </th>
           <th><%= link_to @book.title, book_path(@book.id) %></th>
           <th><%= @book.body %></th>
@@ -49,12 +45,11 @@
               <%= link_to "Destroy", book_path(@book), method: :delete, data: { confirm: "本当に削除しますか?" } %>
             <% end %>
           </th>
-        </div>
-      </tr>
-    </tbody>
+        </tr>
+      </tbody>
 
-    </table>
+      </table>
+    </div>
+
   </div>
-
-</div>
 </div>
